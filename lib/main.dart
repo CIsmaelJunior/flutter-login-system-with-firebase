@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn_projects/screen/Home.dart';
+import 'package:flutter_learn_projects/screen/guest/Auth.dart';
 
 void main() => runApp(App());
 
@@ -10,7 +10,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: AuthScreen(),
+      theme: ThemeData(
+          // primaryColor: Colors.green,
+          ),
     );
   }
 }
