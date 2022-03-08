@@ -43,7 +43,7 @@ class _TermScreenState extends State<TermScreen> {
             ],
           ),
           leading: IconButton(
-            onPressed: () => {},
+            onPressed: () => {widget.onChangedStep(0)},
             icon: Icon(
               Icons.arrow_back,
               color: Colors.black,

@@ -28,7 +28,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
           children: [],
         ),
         leading: IconButton(
-          onPressed: () => {},
+          onPressed: () => {widget.onChangedStep(0)},
           icon: Icon(
             Icons.arrow_back,
             color: Colors.black,
