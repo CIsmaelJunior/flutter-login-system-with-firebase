@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
 
 class TermScreen extends StatefulWidget {
-  const TermScreen({Key? key}) : super(key: key);
+  final Function(int) onChangedStep;
+  const TermScreen({Key? key, required this.onChangedStep}) : super(key: key);
 
   @override
   State<TermScreen> createState() => _TermScreenState();
 }
 
 class _TermScreenState extends State<TermScreen> {
+  late ScrollController _scrollController;
+  bool _termReaded = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.offset >=
+              _scrollController.position.maxScrollExtent &&
+          !_scrollController.position.outOfRange) {
+        setState(() => _termReaded = true);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,6 +57,7 @@ class _TermScreenState extends State<TermScreen> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
+                  controller: _scrollController,
                   physics: AlwaysScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -57,7 +76,8 @@ class _TermScreenState extends State<TermScreen> {
                 padding: EdgeInsets.symmetric(vertical: 15.0),
                 color: Theme.of(context).primaryColor,
                 elevation: 0.0,
-                onPressed: () => {print("object")},
+                onPressed:
+                    !_termReaded ? null : () => {widget.onChangedStep(2)},
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0.0)),
                 child: Text(

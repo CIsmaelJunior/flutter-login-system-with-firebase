@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({Key? key}) : super(key: key);
+  final Function(int) onChangedStep;
+  const AuthScreen({
+    Key? key,
+    required this.onChangedStep,
+  }) : super(key: key);
 
   @override
   State<AuthScreen> createState() => _AuthScreenState();
@@ -41,12 +45,6 @@ class _AuthScreenState extends State<AuthScreen> {
             SizedBox(
               height: 50.0,
             ),
-            Text(
-              "Enter your email",
-              style: TextStyle(
-                fontStyle: FontStyle.italic,
-              ),
-            ),
             SizedBox(
               height: 50.0,
             ),
@@ -84,6 +82,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           ? () {
                               if (_formKey.currentState!.validate()) {
                                 print(_email);
+                                widget.onChangedStep(1);
                               }
                             }
                           : null,
